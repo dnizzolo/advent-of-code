@@ -1,0 +1,2 @@
+*.fasl
+**/inputs/*.txt
