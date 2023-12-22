@@ -31,9 +31,8 @@ AOC2021.14> (parachute:test (find-package :aoc2022.10))
 
 ## Pitfalls
 
-This repository doesn't include the problems' inputs as per this
-[rule](https://www.reddit.com/r/adventofcode/wiki/troubleshooting/no_asking_for_inputs/),
-so you can't just clone it and run the tests or the code right away,
-you'll need to provide the inputs yourself which will likely be
-different from my own so the tests as they are defined probably don't
-make any sense for you.
+This repository doesn't include the problems' inputs or examples, see
+[this](https://adventofcode.com/about). You can't just clone it and
+run the tests or the code right away, you'll need to provide the
+inputs yourself which will likely be different from my own so the
+tests as they are defined probably don't make any sense for you.

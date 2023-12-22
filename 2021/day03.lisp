@@ -47,7 +47,7 @@
      (bit-vector-to-integer (find-carbon-dioxide-scrubber-rating diagnostics))))
 
 (defun day03 ()
-  (let ((diagns (read-diagnostic-report "2021/inputs/day03.txt")))
+  (let ((diagns (read-diagnostic-report #p"2021/inputs/day03.txt")))
     (values (day03/part-1 diagns) (day03/part-2 diagns))))
 
 (define-test (= 845186) (= 4636702))

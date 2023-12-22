@@ -24,9 +24,7 @@
                        for dist = (abs (- crab position))
                        sum (triangular dist))))
 
-(defun day07 ()
-  (let ((crabs (read-crab-positions)))
-    (values (day07/part-1 crabs)
-            (day07/part-2 crabs))))
+(defun day07 (&aux (crabs (read-crab-positions)))
+  (values (day07/part-1 crabs) (day07/part-2 crabs)))
 
 (define-test (= 359648) (= 100727924))

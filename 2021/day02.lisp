@@ -10,7 +10,7 @@
               (list (intern (string-upcase (car spl)) :keyword)
                     (parse-integer (cadr spl)))))
           (uiop:read-file-lines
-           (asdf:system-relative-pathname :advent-of-code "2021/inputs/day02.txt"))))
+           (asdf:system-relative-pathname :advent-of-code #p"2021/inputs/day02.txt"))))
 
 (defun day02/part-1 (commands &aux (horiz 0) (depth 0))
   (dolist (comm commands (* horiz depth))

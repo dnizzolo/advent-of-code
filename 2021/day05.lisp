@@ -10,7 +10,7 @@
             (destructuring-bind (x1 y1 x2 y2) lis
               (list (list x1 y1) (list x2 y2))))
           (with-open-file (in filename)
-            (loop for line = (read-line in nil nil)
+            (loop for line = (read-line in nil)
                   while line
                   collect (parse-integers-from-string line)))))
 

@@ -9,9 +9,9 @@
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path))
         (regex (omrn:compile-regular-expression "«[A-Z]+» -> «[A-Z]»")))
     (with-open-file (in filename)
-      (values (prog1 (coerce (read-line in nil nil) 'list) (read-line in nil nil))
+      (values (prog1 (coerce (read-line in nil) 'list) (read-line in nil))
               (loop with rules = (make-hash-table :test #'equal)
-                    for line = (read-line in nil nil)
+                    for line = (read-line in nil)
                     while line
                     do (omrn:do-matches ((i f li lf ri rf) regex line)
                          (declare (ignorable i f rf))

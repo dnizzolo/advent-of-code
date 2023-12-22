@@ -10,11 +10,11 @@
         (paper (make-hash-table :test #'equal))
         (insts nil))
     (with-open-file (in filename)
-      (loop for line = (read-line in nil nil)
+      (loop for line = (read-line in nil)
             while (plusp (length line))
             for (x y) = (parse-integers-from-string line)
             do (setf (gethash (list x y) paper) t))
-      (setf insts (loop for line = (read-line in nil nil)
+      (setf insts (loop for line = (read-line in nil)
                         while line
                         for coord = (first (parse-integers-from-string line))
                         collect (list (if (find #\x line) :left :up) coord))))

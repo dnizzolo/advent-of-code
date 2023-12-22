@@ -53,9 +53,9 @@
 (defun read-bingo-game (&optional (rel-path #p"2021/inputs/day04.txt")
                         &aux (filename (asdf:system-relative-pathname :advent-of-code rel-path)))
   (with-open-file (in filename)
-    (values (parse-integers-from-string (prog1 (read-line in nil nil) (read-line in nil nil)))
+    (values (parse-integers-from-string (prog1 (read-line in nil) (read-line in nil)))
             (loop while (listen in)
-                  collect (make-bingo-board (loop for line = (read-line in nil nil)
+                  collect (make-bingo-board (loop for line = (read-line in nil)
                                                   while (plusp (length line))
                                                   collect (parse-integers-from-string line)))))))
 

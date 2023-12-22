@@ -7,7 +7,7 @@
 (defun read-navigation-lines (&optional (relative-path #p"2021/inputs/day10.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
     (with-open-file (in filename)
-      (loop for line = (read-line in nil nil)
+      (loop for line = (read-line in nil)
             while line
             collect line))))
 

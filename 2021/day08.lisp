@@ -8,7 +8,7 @@
 (defun read-signal-patterns (&optional (relative-path #p"2021/inputs/day08.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
     (with-open-file (in filename)
-      (loop for line = (read-line in nil nil)
+      (loop for line = (read-line in nil)
             while line
             collect (mapcar (lambda (part)
                               (mapcar (lambda (s) (sort s #'char<))
@@ -19,10 +19,10 @@
   (loop for (signals digits) in patterns
         sum (loop for digit in digits
                   for len = (length digit)
-                  count (or (= len 2)        ; 1
-                            (= len 4)        ; 4
-                            (= len 3)        ; 7
-                            (= len 7)))))    ; 8
+                  count (or (= len 2)        ; 1.
+                            (= len 4)        ; 4.
+                            (= len 3)        ; 7.
+                            (= len 7)))))    ; 8.
 
 (defvar *seven-segments-digit*
   (a:alist-hash-table
@@ -81,7 +81,8 @@
   (loop for (signals digits) in patterns
         for decoder = (make-decoder signals)
         sum (reduce (lambda (acc new) (+ new (* acc 10)))
-                    (mapcar (lambda (dgt) (decode-signal decoder dgt)) digits))))
+                    digits
+                    :key (lambda (dgt) (decode-signal decoder dgt)))))
 
 (defun day08 ()
   (let ((patterns (read-signal-patterns)))

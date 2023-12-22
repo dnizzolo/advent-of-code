@@ -7,7 +7,7 @@
 (defun read-snailfish-numbers (&optional (relative-pathname #p"2021/inputs/day18.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
-      (loop for line = (read-line in nil nil)
+      (loop for line = (read-line in nil)
             while line
             collect (parse-snailfish-number line)))))
 

@@ -8,7 +8,7 @@
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path))
         (adj-list (make-hash-table)))
     (with-open-file (in filename)
-      (loop for line = (read-line in nil nil)
+      (loop for line = (read-line in nil)
             while line
             for (v1 v2) = (uiop:split-string line :separator '(#\-))
             for sv1 = (intern v1 :keyword) and sv2 = (intern v2 :keyword)

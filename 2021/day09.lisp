@@ -8,7 +8,7 @@
 (defun read-caves (&optional (rel-path #p"2021/inputs/day09.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code rel-path))
          (lines (with-open-file (in filename)
-                  (loop for line = (read-line in nil nil)
+                  (loop for line = (read-line in nil)
                         while line
                         collect (map 'list #'digit-char-p line)))))
     (make-array (list (length lines) (length (car lines)))

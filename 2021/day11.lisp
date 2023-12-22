@@ -7,7 +7,7 @@
 (defun read-dumbo-octopuses (&optional (relative-path #p"2021/inputs/day11.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code relative-path))
          (octopuses (with-open-file (in filename)
-                      (loop for line = (read-line in nil nil)
+                      (loop for line = (read-line in nil)
                             while line
                             collect (map 'list #'digit-char-p line)))))
     (make-array (list (length octopuses) (length (first octopuses)))

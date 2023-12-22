@@ -5,8 +5,14 @@
    (:a :alexandria.2)
    (:q :queue))
   (:export
+   :detect-cycle
+   :power-of-2-p
+   :with-memoization
+   :define-memo-function
+   :clear-memo
    :make-counter
    :position-2d
+   :2d-array-to-list
    :list-to-queue
    :all-different-p
    :all-same-p
@@ -20,32 +26,121 @@
 
 (in-package :aoc.utils)
 
-(defun make-counter (sequence &key key (test #'eql))
-  "Return an hash-table that maps the items of SEQUENCE to their
- counts in SEQUENCE."
-  (flet ((make-counter-list ()
-           (loop with counter = (make-hash-table :test test)
-                 for item in (remove-duplicates sequence :key key :test test)
-                 do (setf (gethash item counter) (count item sequence :key key :test test))
-                 finally (return counter)))
-         (make-counter-vector ()
-           (loop with counter = (make-hash-table :test test)
-                 for item across (remove-duplicates sequence :key key :test test)
-                 do (setf (gethash item counter) (count item sequence :key key :test test))
-                 finally (return counter))))
-    (if (listp sequence)
-        (make-counter-list)
-        (make-counter-vector))))
+(defun detect-cycle (function initial-value &key (test #'eql))
+  "Find a cycle in the sequence of iterated FUNCTION values, starting at
+INITIAL-VALUE using Brent's algorithm. Equality is checked by the
+function TEST. Return as multiple values the length of the cycle, the
+index at which the cycle starts and the first value in the cycle."
+  (let (power lambda mu tortoise hare start-value)
+    (loop initially (setf power 1
+                          lambda 1
+                          tortoise initial-value
+                          hare (funcall function initial-value))
+          until (funcall test tortoise hare)
+          when (= power lambda)
+            do (setf tortoise hare
+                     power (ash power 1)
+                     lambda 0)
+          do (setf hare (funcall function hare))
+             (incf lambda))
+    (loop initially (setf tortoise initial-value
+                          hare initial-value)
+          repeat lambda
+          do (setf hare (funcall function hare)))
+    (loop initially (setf mu 0)
+          until (funcall test tortoise hare)
+          do (setf tortoise (funcall function tortoise)
+                   hare (funcall function hare))
+             (incf mu)
+          finally (setf start-value tortoise))
+    (values lambda mu start-value)))
+
+(defun power-of-2-p (n)
+  "Check if N is equal to 2 to the power of some natural number."
+  (declare (type (integer 0) n))
+  (= 1 (logcount n)))
+
+(defmacro with-memoization ((hash-table &rest key-forms) &body body)
+  "Memoize the results of BODY into HASH-TABLE under the key obtained by
+ evaluating all the KEY-FORMS. HASH-TABLE is expected to be a symbol
+ naming an hash-table. If BODY exits by means of a non-local transfer
+ of control, the associated return value is not cached in HASH-TABLE."
+  (declare (type symbol hash-table))
+  (a:with-gensyms (table key value foundp)
+    `(let ((,table ,hash-table)
+           (,key (list ,@key-forms)))
+       (multiple-value-bind (,value ,foundp)
+           (gethash ,key ,table)
+         (if ,foundp
+             ,value
+             (setf (gethash ,key ,table)
+                   (progn ,@body)))))))
+
+(defmacro define-memo-function ((name lambda-list &rest key-forms) &body body)
+  "Define a memoized function at top level. If KEY-FORMS are provided
+they are used to create a list that serves as key into the hash-table.
+Forms in KEY-FORMS may refer to parameters in the LAMBDA-LIST."
+  `(memoize-defun (defun ,name ,lambda-list ,@body)
+                  ,(when key-forms
+                     `(lambda ,lambda-list (list ,@key-forms)))))
+
+(defun memoize-defun (name key-fn)
+  "Replace NAME's global function definition with its memoized
+ version. Store the hash table for memoization in symbol NAME's plist
+ under the key :MEMO."
+  (flet ((memo (function)
+           (let ((table (make-hash-table :test #'equal))
+                 (key-fn (or key-fn #'identity)))
+             (setf (get name :memo) table)
+             (lambda (&rest args)
+               (multiple-value-bind (value foundp)
+                   (gethash (apply key-fn args) table)
+                 (if foundp
+                     value
+                     (setf (gethash (apply key-fn args) table)
+                           (apply function args))))))))
+    (setf (fdefinition name) (memo (fdefinition name)))))
+
+(defun clear-memo (name)
+  "Clear the hash table of NAME's memoized function."
+  (let ((table (get name :memo)))
+    (when table (clrhash table))))
+
+(defgeneric make-counter (bag &key key test)
+  (:documentation "Return an hash-table that maps the items in BAG to their counts."))
+
+(defmethod make-counter ((bag list) &key key (test #'eql))
+  (loop with counter = (make-hash-table :test test)
+        with key-fn = (or key #'identity)
+        for item in bag
+        do (incf (gethash (funcall key-fn item) counter 0))
+        finally (return counter)))
+
+(defmethod make-counter ((bag vector) &key key (test #'eql))
+  (loop with counter = (make-hash-table :test test)
+        with key-fn = (or key #'identity)
+        for item across bag
+        do (incf (gethash (funcall key-fn item) counter 0))
+        finally (return counter)))
 
 (defun position-2d (item array &key (test #'eql))
   "Find the first position in ARRAY which is equal to ITEM as defined by
 TEST. ARRAY is a two-dimensional array. Return the two indices of the
 occurrence as multiple values."
+  (declare (type (array * (* *)) array))
   (destructuring-bind (m n) (array-dimensions array)
     (dotimes (i m)
       (dotimes (j n)
         (when (funcall test item (aref array i j))
           (return-from position-2d (values i j)))))))
+
+(defun 2d-array-to-list (array)
+  "Convert a two-dimensional array into a list of lists by rows."
+  (declare (type (array * (* *)) array))
+  (destructuring-bind (m n) (array-dimensions array)
+    (loop for i below m
+          collect (loop for j below n
+                        collect (aref array i j)))))
 
 (defun list-to-queue (list &aux (q (q:make-queue (length list))))
   "Create a queue with the elements of LIST in the order they appear."
@@ -84,6 +179,7 @@ them in a list."
 (defun bit-vector-to-integer (bit-vector &key (start 0) (end (length bit-vector)))
   "Convert the bit-vector BIT-VECTOR from START to END (not included) to
 the corresponding integer."
+  (declare (type bit-vector bit-vector))
   (loop with result = 0
         for i from start below end
         do (setf result (+ (* 2 result) (bit bit-vector i)))
@@ -157,7 +253,7 @@ Algorithm."
   "Apply the Chinese Remainder Theorem to solve the system of
 congruences given by TERMS and MODULI and return the smallest positive
 integer solution."
-  (declare (type (vector integer *) terms moduli))
+  (declare (type (vector integer) terms moduli))
   (assert (= (length terms) (length moduli)))
   (let* ((n (reduce #'* moduli))
          (m (map 'vector (lambda (r) (/ n r)) moduli))

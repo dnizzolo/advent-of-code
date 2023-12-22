@@ -8,7 +8,7 @@
   (mapcar #'parse-integer
           (uiop:read-file-lines
            (asdf:system-relative-pathname
-            :advent-of-code "2021/inputs/day01.txt"))))
+            :advent-of-code #p"2021/inputs/day01.txt"))))
 
 (defun day01 ()
   (let ((depths (read-sonar-depths)))
