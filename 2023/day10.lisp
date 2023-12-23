@@ -1,6 +1,5 @@
 (defpackage :aoc2023.10
   (:documentation "Pipe Maze.")
-  (:local-nicknames (:a :alexandria.2))
   (:use :cl :aoc.utils))
 
 (in-package :aoc2023.10)
@@ -54,7 +53,7 @@
         while b
         sum (* (cdr b) (- (car b) (car a))) into integral
         finally
-           (let ((a (a:lastcar curve)) (b (first curve)))
+           (let ((b (first curve)))
              (incf integral (* (cdr b) (- (car b) (car a))))
              (return (- (abs integral) (ash (length curve) -1) -1)))))
 
