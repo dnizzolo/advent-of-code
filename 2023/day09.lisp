@@ -9,7 +9,7 @@
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            collect (nreverse (parse-integers-from-string line))))))
+            collect (nreverse (parse-integers line))))))
 
 (defun compute-next-value (history)
   (if (every #'zerop history)

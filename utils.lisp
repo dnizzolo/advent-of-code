@@ -5,24 +5,24 @@
    (:a :alexandria.2)
    (:q :queue))
   (:export
-   :detect-cycle
-   :power-of-2-p
-   :with-memoization
-   :define-memo-function
-   :clear-memo
-   :make-counter
-   :position-2d
-   :2d-array-to-list
-   :list-to-queue
-   :all-different-p
-   :all-same-p
-   :parse-integers-from-string
-   :triangular
-   :bit-vector-to-integer
-   :extended-gcd
-   :modular-inverse
-   :chinese-remainder-theorem
-   :define-test))
+   #:detect-cycle
+   #:power-of-2-p
+   #:with-memoization
+   #:define-memo-function
+   #:clear-memo
+   #:make-counter
+   #:position-2d
+   #:2d-array-to-list
+   #:list-to-queue
+   #:all-different-p
+   #:all-same-p
+   #:parse-integers
+   #:triangular
+   #:bit-vector-to-integer
+   #:extended-gcd
+   #:modular-inverse
+   #:chinese-remainder-theorem
+   #:define-test))
 
 (in-package :aoc.utils)
 
@@ -156,7 +156,7 @@ is a set."
   "Check if the elements in SEQUENCE are all the same."
   (or (zerop len) (= len (count (elt sequence 0) sequence :test test))))
 
-(defun parse-integers-from-string (string &key (start 0) end (radix 10))
+(defun parse-integers (string &key (start 0) end (radix 10))
   "Parse all the integers in STRING ignoring other contents and return
 them in a list."
   (declare (type string string))
@@ -265,7 +265,7 @@ integer solution."
           do (setf result (mod (+ result (mod (* b k i) n)) n))
           finally (return result))))
 
-(defmacro define-test ((comparator-1 expected-part-1) (comparator-2 expected-part-2))
+(defmacro define-test (&body comparators)
   "Define a test with expected results for both parts of the problem.
 The day and hence the name of said day's function are inferred from
 the name of the current package as per convention."
@@ -276,6 +276,8 @@ the name of the current package as per convention."
          (test-name (format nil "~A.~A" year-string day-string))
          (day-function-symbol (find-symbol (format nil "DAY~A" day-string))))
     `(parachute:define-test ,test-name
-       (parachute:is-values (,day-function-symbol)
-         (,comparator-1 ,expected-part-1)
-         (,comparator-2 ,expected-part-2)))))
+       ,(if (rest comparators)
+            `(parachute:is-values (,day-function-symbol)
+               ,@comparators)
+            ;; Extract COMP and EXPECT from ((COMP EXPECT)).
+            `(,(caar comparators) ,(cadar comparators) (,day-function-symbol))))))

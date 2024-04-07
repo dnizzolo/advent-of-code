@@ -10,7 +10,7 @@
 (defun read-crab-positions (&optional (rel-path #p"2021/inputs/day07.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code rel-path)))
     (with-open-file (in filename)
-      (parse-integers-from-string (read-line in)))))
+      (parse-integers (read-line in)))))
 
 (defun day07/part-1 (crabs)
   (loop with median = (a:median crabs)

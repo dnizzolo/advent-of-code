@@ -9,7 +9,7 @@
         (cave (make-hash-table :test #'equal)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil) while line do
-        (loop for (xi yi xf yf) on (parse-integers-from-string line) by #'cddr
+        (loop for (xi yi xf yf) on (parse-integers line) by #'cddr
               while yf
               do (cond ((= xi xf)
                         (loop for i from (min yi yf) to (max yi yf) do

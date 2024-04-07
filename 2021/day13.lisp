@@ -12,11 +12,11 @@
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while (plusp (length line))
-            for (x y) = (parse-integers-from-string line)
+            for (x y) = (parse-integers line)
             do (setf (gethash (list x y) paper) t))
       (setf insts (loop for line = (read-line in nil)
                         while line
-                        for coord = (first (parse-integers-from-string line))
+                        for coord = (first (parse-integers line))
                         collect (list (if (find #\x line) :left :up) coord))))
     (values paper insts)))
 

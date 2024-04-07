@@ -13,13 +13,13 @@
 
 (defun read-monkeys (&optional (relative-pathname #p"2022/inputs/day11.txt"))
   (flet ((parse-initial-items (string)
-           (let ((ints (parse-integers-from-string string)))
+           (let ((ints (parse-integers string)))
              (make-array (length ints)
                          :initial-contents ints
                          :adjustable t
                          :fill-pointer t)))
          (parse-operation (string)
-           (let ((int (car (parse-integers-from-string string)))
+           (let ((int (car (parse-integers string)))
                  (mulp (find #\* string)))
              (if int
                  (if mulp
@@ -29,7 +29,7 @@
                      (lambda (old) (* old old))
                      (lambda (old) (+ old old))))))
          (parse-number (string)
-           (car (parse-integers-from-string string))))
+           (car (parse-integers string))))
     (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
       (with-open-file (in filename)
         (loop with monkey

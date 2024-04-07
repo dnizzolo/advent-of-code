@@ -4,8 +4,8 @@
   :depends-on (:parachute
                :alexandria
                :serapeum
-               :one-more-re-nightmare
-               :damn-fast-priority-queue
+               :cl-ppcre
+               :min-priority-queue
                :queue
                :magicl)
   :serial t
@@ -64,7 +64,9 @@
                              (:file "day15")
                              (:file "day16")
                              (:file "day17")
-                             (:file "day18"))))
+                             (:file "day18")
+                             (:file "day19")
+                             (:file "day25"))))
   :in-order-to ((asdf:test-op (asdf:test-op :advent-of-code/test))))
 
 (asdf:defsystem :advent-of-code/test

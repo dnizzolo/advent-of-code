@@ -11,13 +11,11 @@
             while line
             collect (length
                      (intersection
-                      (parse-integers-from-string
-                       line
-                       :start (position #\: line)
-                       :end (position #\| line))
-                      (parse-integers-from-string
-                       line
-                       :start (position #\| line))))))))
+                      (parse-integers line
+                                      :start (position #\: line)
+                                      :end (position #\| line))
+                      (parse-integers line
+                                      :start (position #\| line))))))))
 
 (defun scratchcards-points (scratchcards)
   (loop for wins in scratchcards sum (ash 1 (1- wins))))

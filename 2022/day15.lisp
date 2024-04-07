@@ -10,7 +10,7 @@
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            for ints = (parse-integers-from-string line)
+            for ints = (parse-integers line)
             collect (cons (apply #'manhattan-distance ints) ints)))))
 
 (defun manhattan-distance (x1 y1 x2 y2) (+ (abs (- x1 x2)) (abs (- y1 y2))))

@@ -7,12 +7,12 @@
 (defun read-almanac (&optional (relative-pathname #p"2023/inputs/day05.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
-      (loop with seeds = (parse-integers-from-string (prog1 (read-line in nil)
-                                                       (read-line in nil)))
+      (loop with seeds = (parse-integers (prog1 (read-line in nil)
+                                           (read-line in nil)))
             while (listen in)
             collect (loop initially (read-line in nil)
                           for line = (read-line in nil)
-                          while (plusp (length line)) collect (parse-integers-from-string line))
+                          while (plusp (length line)) collect (parse-integers line))
               into maps
             finally (return (values seeds maps))))))
 

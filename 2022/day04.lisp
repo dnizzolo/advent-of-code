@@ -12,7 +12,7 @@
             do (dotimes (i (length line))
                  (when (char= (char line i) #\-)
                    (setf (char line i) #\Space)))
-            collect (parse-integers-from-string line)))))
+            collect (parse-integers line)))))
 
 (defun day04 ()
   (let ((pairs (read-cleanup-assignment-pairs)))

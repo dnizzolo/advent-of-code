@@ -1,6 +1,6 @@
 (defpackage :aoc2021.15
   (:documentation "Chiton.")
-  (:local-nicknames (:dfpq :damn-fast-priority-queue))
+  (:local-nicknames (:pq :min-priority-queue))
   (:use :cl :aoc.utils))
 
 (in-package :aoc2021.15)
@@ -21,11 +21,11 @@
 (defun risk-search (source goal &key neighbours risk
                     &aux
                       (enqueued (make-hash-table :test #'equal))
-                      (frontier (dfpq:make-queue)))
+                      (frontier (pq:make-min-priority-queue)))
   (setf (gethash source enqueued) 0)
-  (dfpq:enqueue frontier source 0)
-  (loop while (dfpq:peek frontier)
-        for vertex = (dfpq:dequeue frontier)
+  (pq:insert frontier source 0)
+  (loop while (pq:peek-min frontier)
+        for vertex = (pq:extract-min frontier)
         for cost = (gethash vertex enqueued)
         if (equal vertex goal)
           return cost
@@ -33,7 +33,7 @@
                                    unless (gethash neigh enqueued) collect neigh)
                  for next-cost = (+ cost (funcall risk next))
                  do (setf (gethash next enqueued) next-cost)
-                    (dfpq:enqueue frontier next next-cost))))
+                    (pq:insert frontier next next-cost))))
 
 (defun day15/part-1 (risk-levels rows cols)
   (risk-search '(0 0)

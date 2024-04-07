@@ -8,15 +8,22 @@
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (uiop:read-file-string filename)))
 
-(defun datastream-start-marker (data &key (distinct-chars-required 4))
-  (loop for i from distinct-chars-required below (length data)
-        for slice = (subseq data (- i distinct-chars-required) i)
-        until (all-different-p slice)
-        finally (return i)))
+(defun datastream-start-marker (data window-size)
+  (let ((set 0))
+    (dotimes (i (length data))
+      (setf set (logxor set
+                        (ash 1 (- (char-code (char data i))
+                                  #.(char-code #\a)))))
+      (when (>= i window-size)
+        (setf set (logxor set
+                          (ash 1 (- (char-code (char data (- i window-size)))
+                                    #.(char-code #\a))))))
+      (when (= window-size (logcount set))
+        (return (1+ i))))))
 
 (defun day06 ()
   (let ((data (read-datastream-buffer)))
-    (values (datastream-start-marker data)
-            (datastream-start-marker data :distinct-chars-required 14))))
+    (values (datastream-start-marker data 4)
+            (datastream-start-marker data 14))))
 
 (define-test (= 1343) (= 2193))

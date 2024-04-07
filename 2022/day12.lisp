@@ -30,7 +30,7 @@
                         (seen (make-hash-table :test #'equal)))
   (q:enqueue q start)
   (setf (gethash start seen) 0)
-  (loop until (q:empty-queue-p q)
+  (loop until (q:emptyp q)
         for v = (q:dequeue q)
         for (x y) = v
         if (char= goal (aref grid x y))

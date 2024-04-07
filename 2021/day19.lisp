@@ -17,7 +17,7 @@
                                for line = (read-line in nil)
                                while (plusp (length line))
                                collect (m:from-list
-                                        (parse-integers-from-string line)
+                                        (parse-integers line)
                                         '(3)
                                         :type 'double-float))
             while points

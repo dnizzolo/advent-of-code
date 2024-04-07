@@ -10,8 +10,8 @@
              (if single-race-p (delete #\Space s) s))))
     (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
       (with-open-file (in filename)
-        (let ((time (parse-integers-from-string (read-line-for-table in)))
-              (distance (parse-integers-from-string (read-line-for-table in))))
+        (let ((time (parse-integers (read-line-for-table in)))
+              (distance (parse-integers (read-line-for-table in))))
           (if single-race-p
               (cons (first time) (first distance))
               (mapcar #'cons time distance)))))))

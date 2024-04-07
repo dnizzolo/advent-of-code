@@ -1,8 +1,6 @@
 (defpackage :aoc2022.07
   (:documentation "No Space Left On Device.")
-  (:local-nicknames
-   (:a :alexandria.2)
-   (:omrn :one-more-re-nightmare))
+  (:local-nicknames (:a :alexandria.2))
   (:use :cl :aoc.utils))
 
 (in-package :aoc2022.07)
@@ -42,17 +40,14 @@
 
 (defun read-command-output (&optional (relative-pathname #p"2022/inputs/day07.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))
-        (regex (omrn:compile-regular-expression "($ )*«[¬ ]+» *«[¬ ]*»")))
-    (flet ((match (string)
-             (let ((result (omrn:first-string-match regex string)))
-               (list (svref result 1) (svref result 2)))))
-      (with-open-file (in filename)
-        (loop with root-dir = (make-instance 'dir :name "/")
-              with current-dir = root-dir
-              for line = (read-line in nil)
-              while line
-              for (p1 p2) = (match line)
-              do (cond ((string= p1 "cd")
+        (regex (ppcre:create-scanner "(?:\\$\\s+)?(\\S+)\\s*(\\S*)")))
+    (with-open-file (in filename)
+      (loop with root-dir = (make-instance 'dir :name "/")
+            with current-dir = root-dir
+            for line = (read-line in nil)
+            while line
+            do (ppcre:register-groups-bind (p1 p2) (regex line)
+                 (cond ((string= p1 "cd")
                         (setf current-dir
                               (cond ((string= p2 "/") root-dir)
                                     ((string= p2 "..") (dir-parent current-dir))
@@ -65,8 +60,8 @@
                                              :name p2
                                              :parent current-dir
                                              :size (parse-integer p1))
-                              (dir-entries current-dir))))
-              finally (return root-dir))))))
+                              (dir-entries current-dir)))))
+            finally (return root-dir)))))
 
 (defun sum-size-of-dirs (root &aux (max-size 100000))
   (loop for e in (subdirs root)

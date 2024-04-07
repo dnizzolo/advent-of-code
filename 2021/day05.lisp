@@ -11,8 +11,7 @@
               (list (list x1 y1) (list x2 y2))))
           (with-open-file (in filename)
             (loop for line = (read-line in nil)
-                  while line
-                  collect (parse-integers-from-string line)))))
+                  while line collect (parse-integers line)))))
 
 (defun straightp (pair)
   (or (= (caar pair) (caadr pair)) (= (cadar pair) (cadadr pair))))

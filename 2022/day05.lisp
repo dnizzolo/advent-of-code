@@ -19,8 +19,7 @@
                             (setf (gethash j stacks) stack))))
       (maphash (lambda (k v) (setf (gethash k stacks) (nreverse v))) stacks)
       (values stacks (loop for line = (read-line in nil)
-                           while line
-                           collect (parse-integers-from-string line))))))
+                           while line collect (parse-integers line))))))
 
 (defun top-of-cargo-stacks (stacks)
   (loop for i from 1

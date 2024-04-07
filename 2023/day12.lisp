@@ -12,8 +12,7 @@
             while line
             for p = (position #\Space line)
             collect (cons (subseq line 0 p)
-                          (coerce (parse-integers-from-string line :start (1+ p))
-                                  'vector))))))
+                          (coerce (parse-integers line :start (1+ p)) 'vector))))))
 
 (defun count-arrangements (configuration groups
                            &aux
