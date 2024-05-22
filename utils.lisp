@@ -12,13 +12,13 @@
    #:clear-memo
    #:make-counter
    #:position-2d
-   #:2d-array-to-list
-   #:list-to-queue
+   #:2d-array->list
+   #:list->queue
    #:all-different-p
    #:all-same-p
    #:parse-integers
    #:triangular
-   #:bit-vector-to-integer
+   #:bit-vector->integer
    #:extended-gcd
    #:modular-inverse
    #:chinese-remainder-theorem
@@ -134,7 +134,7 @@ occurrence as multiple values."
         (when (funcall test item (aref array i j))
           (return-from position-2d (values i j)))))))
 
-(defun 2d-array-to-list (array)
+(defun 2d-array->list (array)
   "Convert a two-dimensional array into a list of lists by rows."
   (declare (type (array * (* *)) array))
   (destructuring-bind (m n) (array-dimensions array)
@@ -142,7 +142,7 @@ occurrence as multiple values."
           collect (loop for j below n
                         collect (aref array i j)))))
 
-(defun list-to-queue (list &aux (q (q:make-queue (length list))))
+(defun list->queue (list &aux (q (q:make-queue (length list))))
   "Create a queue with the elements of LIST in the order they appear."
   (dolist (item list) (q:enqueue q item))
   q)
@@ -176,7 +176,7 @@ them in a list."
   (declare (type (integer 0) n))
   (* 1/2 (* n (1+ n))))
 
-(defun bit-vector-to-integer (bit-vector &key (start 0) (end (length bit-vector)))
+(defun bit-vector->integer (bit-vector &key (start 0) (end (length bit-vector)))
   "Convert the bit-vector BIT-VECTOR from START to END (not included) to
 the corresponding integer."
   (declare (type bit-vector bit-vector))
@@ -266,7 +266,7 @@ integer solution."
           finally (return result))))
 
 (defmacro define-test (&body comparators)
-  "Define a test with expected results for both parts of the problem.
+  "Define a test with expected results for parts of the problem.
 The day and hence the name of said day's function are inferred from
 the name of the current package as per convention."
   (let* ((package-name (package-name *package*))

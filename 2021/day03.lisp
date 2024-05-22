@@ -5,11 +5,11 @@
 (in-package :aoc2021.03)
 
 (defun read-diagnostic-report (path)
-  (mapcar #'string-to-bit-vector
+  (mapcar #'string->bit-vector
           (uiop:read-file-lines
            (asdf:system-relative-pathname :advent-of-code path))))
 
-(defun string-to-bit-vector (s)
+(defun string->bit-vector (s)
   (make-array (length s) :element-type 'bit :initial-contents (map 'list #'digit-char-p s)))
 
 (defun day03/part-1 (diagnostics)
@@ -18,7 +18,7 @@
                        (lambda (&rest bits) (if (< (count 0 bits) (count 1 bits)) 0 1))
                        diagnostics))
          (epsilon (bit-not gamma)))
-    (* (bit-vector-to-integer gamma) (bit-vector-to-integer epsilon))))
+    (* (bit-vector->integer gamma) (bit-vector->integer epsilon))))
 
 (defun most-common-nth-bit (i bvs)
   (if (>= (count 1 (mapcar (lambda (bv) (sbit bv i)) bvs)) (/ (length bvs) 2)) 1 0))
@@ -43,8 +43,8 @@
   (frequency-based-filter 0 diagnostics :keep-when #'/=))
 
 (defun day03/part-2 (diagnostics)
-  (* (bit-vector-to-integer (find-oxygen-generator-rating diagnostics))
-     (bit-vector-to-integer (find-carbon-dioxide-scrubber-rating diagnostics))))
+  (* (bit-vector->integer (find-oxygen-generator-rating diagnostics))
+     (bit-vector->integer (find-carbon-dioxide-scrubber-rating diagnostics))))
 
 (defun day03 ()
   (let ((diagns (read-diagnostic-report #p"2021/inputs/day03.txt")))

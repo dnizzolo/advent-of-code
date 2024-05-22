@@ -6,9 +6,9 @@
 
 (defun read-packet (&optional (relative-pathname #p"2021/inputs/day16.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
-    (parse-packet (hex-string-to-bit-vector (uiop:read-file-line filename)))))
+    (parse-packet (hex-string->bit-vector (uiop:read-file-line filename)))))
 
-(defun hex-string-to-bit-vector (string)
+(defun hex-string->bit-vector (string)
   (loop with bitv = (make-array 4096 :element-type 'bit :fill-pointer 0 :adjustable t)
         for hex-digit across string
         for int = (digit-char-p hex-digit 16)
@@ -38,8 +38,8 @@
     :reader sub-packets)))
 
 (defun parse-packet (bv &optional (start 0))
-  (let ((version (bit-vector-to-integer bv :start start :end (incf start 3)))
-        (type-id (bit-vector-to-integer bv :start start :end (incf start 3))))
+  (let ((version (bit-vector->integer bv :start start :end (incf start 3)))
+        (type-id (bit-vector->integer bv :start start :end (incf start 3))))
     (if (= type-id 4)
         (multiple-value-bind (literal start)
             (parse-literal-packet bv start)
@@ -62,22 +62,22 @@
 (defun parse-literal-packet (bv &optional (start 0) &aux (literal 0))
   (loop (let ((morep (= (bit bv start) 1)))
           (setf literal (+ (* literal 16)
-                           (bit-vector-to-integer bv
-                                                  :start (incf start)
-                                                  :end (incf start 4))))
+                           (bit-vector->integer bv
+                                                :start (incf start)
+                                                :end (incf start 4))))
           (unless morep (return (values literal start))))))
 
 (defun parse-operator-packet (bv &optional (start 0))
   (let ((length-type-id (prog1 (bit bv start) (incf start))))
     (if (zerop length-type-id)
-        (loop with bits = (bit-vector-to-integer bv :start start :end (incf start 15))
+        (loop with bits = (bit-vector->integer bv :start start :end (incf start 15))
               until (= consumed bits)
               for (new-packet new-start) = (multiple-value-list (parse-packet bv start))
               sum (- new-start start) into consumed
               collect new-packet into sub-packets
               do (setf start new-start)
               finally (return (values length-type-id sub-packets start)))
-        (loop with count = (bit-vector-to-integer bv :start start :end (incf start 11))
+        (loop with count = (bit-vector->integer bv :start start :end (incf start 11))
               repeat count
               for (new-packet new-start) = (multiple-value-list (parse-packet bv start))
               collect new-packet into sub-packets

@@ -10,10 +10,10 @@
       (loop for line = (read-line in nil)
             while line
             for subline = (subseq line (1+ (position #\: line)))
-            collect (game-to-rgb subline)))))
+            collect (game->rgb subline)))))
 
-(defun game-to-rgb (game)
-  (flet ((round-to-rgb (round)
+(defun game->rgb (game)
+  (flet ((round->rgb (round)
            (let ((parts (uiop:split-string round :separator '(#\,)))
                  (regex (ppcre:create-scanner "(\\d+) (red|blue|green)")))
              (loop with r = 0 with g = 0 with b = 0
@@ -27,7 +27,7 @@
                           (#\b (setf b qty))))
                    finally (return (list r g b))))))
     (let ((rounds (uiop:split-string game :separator '(#\;))))
-      (loop for round in rounds collect (round-to-rgb round)))))
+      (loop for round in rounds collect (round->rgb round)))))
 
 (defun sum-possible-games (games red green blue)
   (flet ((possible-game-p (game)

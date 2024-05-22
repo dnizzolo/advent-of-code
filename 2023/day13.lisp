@@ -11,12 +11,12 @@
             collect (loop for line = (read-line in nil)
                           while (plusp (length line))
                           collect line into rows
-                          finally (return (pattern-to-rows-cols
+                          finally (return (pattern->rows-cols
                                            (make-array
                                             (list (length rows) (length (first rows)))
                                             :initial-contents rows))))))))
 
-(defun pattern-to-rows-cols (pattern)
+(defun pattern->rows-cols (pattern)
   (destructuring-bind (n m) (array-dimensions pattern)
     (flet ((rows-as-ints ()
              (let ((result (make-array n)))

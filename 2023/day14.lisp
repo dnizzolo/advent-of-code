@@ -88,7 +88,7 @@
                   ((char= #\# char)
                    (setf (aref new i j) #\#)))))))))
 
-(defun platform-to-string (platform)
+(defun platform->string (platform)
   (declare (optimize (speed 3) (debug 0) (safety 0) (space 0) (compilation-speed 0)))
   (declare (type (simple-array character (* *)) platform))
   (destructuring-bind (n m) (array-dimensions platform)
@@ -99,7 +99,7 @@
           (setf (char result (+ j (* i m))) (aref platform i j))))
       result)))
 
-(define-memo-function (cycle (platform) (platform-to-string platform))
+(define-memo-function (cycle (platform) (platform->string platform))
   (move-east (move-south (move-west (move-north platform)))))
 
 (defun platform= (platform1 platform2)

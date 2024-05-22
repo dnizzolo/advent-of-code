@@ -13,7 +13,7 @@
             for p = (position #\Space line)
             collect (cons (subseq line 0 p) (parse-integer line :start (1+ p)))))))
 
-(defun hand-to-string (hand &optional joker-rule-p)
+(defun hand->string (hand &optional joker-rule-p)
   (unless joker-rule-p (setf hand (substitute #\X #\J hand)))
   (let* ((card-ranks "J23456789TXQKA")
          (type-ranks #((1 1 1 1 1) (1 1 1 2) (1 2 2) (1 1 3) (2 3) (1 4) (5)))
@@ -33,9 +33,9 @@
 (defun day07 (&aux (hands-bids (read-hands-and-bids)))
   (values (total-winnings (sort (copy-seq hands-bids)
                                 #'string<
-                                :key (lambda (x) (hand-to-string (car x)))))
+                                :key (lambda (x) (hand->string (car x)))))
           (total-winnings (sort hands-bids
                                 #'string<
-                                :key (lambda (x) (hand-to-string (car x) t))))))
+                                :key (lambda (x) (hand->string (car x) t))))))
 
 (define-test (= 248836197) (= 251195607))
