@@ -22,10 +22,10 @@
 (defmethod print-object ((board bingo-board) stream)
   (with-slots (numbers marked-numbers) board
     (dotimes (i 5)
-      (format stream "~&")
+      (fresh-line stream)
       (dotimes (j 5)
         (format stream
-                "~3,' D~A"
+                "~3,' d~a"
                 (aref numbers i j)
                 (if (aref marked-numbers i j) #\# #\Space))))))
 

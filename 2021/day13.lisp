@@ -47,7 +47,7 @@
         (terpri out)
         (loop for i upto rows do
           (loop for j upto cols do
-            (format out "~A" (if (gethash (list j i) paper) #\Full_Block #\.)))
+            (princ (if (gethash (list j i) paper) #\Full_Block #\.) out))
           (terpri out))))))
 
 (defun day13 ()

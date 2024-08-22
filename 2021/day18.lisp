@@ -16,7 +16,7 @@
              (lambda (instance stream level)
                (declare (ignorable level))
                (with-slots (left right parent) instance
-                 (format stream "(~A ~A)" left right)))))
+                 (format stream "(~a ~a)" left right)))))
   left right parent)
 
 (defun parse-snailfish-number (string &optional (start 0))

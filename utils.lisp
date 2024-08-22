@@ -247,7 +247,7 @@ Algorithm."
   (:report
    (lambda (condition stream)
      (with-slots (number modulus) condition
-       (format stream "~&~A is not invertible modulo ~A." number modulus)))))
+       (format stream "~&~a is not invertible modulo ~a." number modulus)))))
 
 (defun chinese-remainder-theorem (terms moduli)
   "Apply the Chinese Remainder Theorem to solve the system of
@@ -273,8 +273,8 @@ the name of the current package as per convention."
          (dotloc (position #\. package-name))
          (year-string (subseq package-name (- dotloc 4) dotloc))
          (day-string (subseq package-name (1+ dotloc)))
-         (test-name (format nil "~A.~A" year-string day-string))
-         (day-function-symbol (find-symbol (format nil "DAY~A" day-string))))
+         (test-name (format nil "~a.~a" year-string day-string))
+         (day-function-symbol (find-symbol (format nil "DAY~a" day-string))))
     `(parachute:define-test ,test-name
        ,(if (rest comparators)
             `(parachute:is-values (,day-function-symbol)

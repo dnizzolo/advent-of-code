@@ -7,7 +7,7 @@
 (defun read-packets (&optional (relative-pathname #p"2022/inputs/day13.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (read-from-string
-     (format nil "(~A)"
+     (format nil "(~a)"
              (map 'string
                   (lambda (x)
                     (case x

@@ -1,13 +1,16 @@
-(asdf:defsystem :advent-of-code
+(defsystem "advent-of-code"
   :description "Advent of Code"
   :author "Daniele Nizzolo <dani.nizzolo@gmail.com>"
-  :depends-on (:parachute
-               :alexandria
-               :serapeum
-               :cl-ppcre
-               :min-priority-queue
-               :queue
-               :magicl)
+  :maintainer "Daniele Nizzolo <dani.nizzolo@gmail.com>"
+  :homepage "https://github.com/dnizzolo/advent-of-code"
+  :source-control (:git "https://github.com/dnizzolo/advent-of-code.git")
+  :bug-tracker "https://github.com/dnizzolo/advent-of-code/issues"
+  :depends-on ("parachute"
+               "alexandria"
+               "serapeum"
+               "cl-ppcre"
+               "min-priority-queue"
+               "queue")
   :serial t
   :components ((:file "utils")
                (:module "2021"
@@ -67,12 +70,17 @@
                              (:file "day18")
                              (:file "day19")
                              (:file "day25"))))
-  :in-order-to ((asdf:test-op (asdf:test-op :advent-of-code/test))))
+  :in-order-to ((asdf:test-op (asdf:test-op "advent-of-code/test"))))
 
-(asdf:defsystem :advent-of-code/test
+(defsystem "advent-of-code/test"
   :description "Test suite for Advent of Code"
   :author "Daniele Nizzolo <dani.nizzolo@gmail.com>"
-  :depends-on (:advent-of-code)
-  :perform (test-op (op c)
-                    (uiop:symbol-call :parachute :test
-                                      (uiop:symbol-call :parachute :test-packages))))
+  :maintainer "Daniele Nizzolo <dani.nizzolo@gmail.com>"
+  :homepage "https://github.com/dnizzolo/advent-of-code"
+  :source-control (:git "https://github.com/dnizzolo/advent-of-code.git")
+  :bug-tracker "https://github.com/dnizzolo/advent-of-code/issues"
+  :depends-on ("advent-of-code")
+  :perform (test-op (op c) (symbol-call
+                            :parachute
+                            :test
+                            (symbol-call :parachute :test-packages))))
