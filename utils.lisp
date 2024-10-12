@@ -247,7 +247,7 @@ Algorithm."
   (:report
    (lambda (condition stream)
      (with-slots (number modulus) condition
-       (format stream "~&~a is not invertible modulo ~a." number modulus)))))
+       (format stream "~a is not invertible modulo ~a." number modulus)))))
 
 (defun chinese-remainder-theorem (terms moduli)
   "Apply the Chinese Remainder Theorem to solve the system of
