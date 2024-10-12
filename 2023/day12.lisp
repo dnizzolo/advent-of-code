@@ -20,7 +20,7 @@
                              (m (length groups)))
   (declare (optimize (speed 3) (debug 0) (safety 0) (space 0) (compilation-speed 0)))
   (declare (type simple-string configuration))
-  (declare (type (simple-array fixnum *) groups))
+  (declare (type (simple-array fixnum (*)) groups))
   (declare (type fixnum n m))
   (let ((dp (make-array (list (1+ n) (1+ m)) :element-type 'fixnum)))
     (setf (aref dp n m) 1)
