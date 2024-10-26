@@ -61,7 +61,7 @@
             (loop for item across items
                   for worry = (if worried
                                   (mod (funcall operation item) lcm)
-                                  (floor (/ (funcall operation item) 3)))
+                                  (floor (funcall operation item) 3))
                   for divisible = (zerop (mod worry divisor))
                   do (vector-push-extend
                       worry

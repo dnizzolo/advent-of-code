@@ -70,6 +70,7 @@
                              (:file "day18")
                              (:file "day19")
                              (:file "day20")
+                             (:file "day21")
                              (:file "day25"))))
   :in-order-to ((asdf:test-op (asdf:test-op "advent-of-code/test"))))
 
