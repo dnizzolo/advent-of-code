@@ -144,8 +144,7 @@ occurrence as multiple values."
 
 (defun list->queue (list &aux (q (q:make-queue (length list))))
   "Create a queue with the elements of LIST in the order they appear."
-  (dolist (item list) (q:enqueue q item))
-  q)
+  (dolist (item list q) (q:enqueue q item)))
 
 (defun all-different-p (sequence &key (test #'eql))
   "Check if the elements in SEQUENCE are all different, i.e., SEQUENCE
