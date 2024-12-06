@@ -76,7 +76,9 @@
                 :components ((:file "day01")
                              (:file "day02")
                              (:file "day03")
-                             (:file "day04"))))
+                             (:file "day04")
+                             (:file "day05")
+                             (:file "day06"))))
   :in-order-to ((asdf:test-op (asdf:test-op "advent-of-code/test"))))
 
 (defsystem "advent-of-code/test"
