@@ -13,7 +13,7 @@
         for i from 0
         for char across disk-map
         for amount = (digit-char-p char)
-        for item = (if (zerop (mod i 2)) (/ i 2) nil)
+        for item = (if (evenp i) (ash i -1) nil)
         do (dotimes (j amount) (vector-push-extend item blocks))
         finally (return blocks)))
 
