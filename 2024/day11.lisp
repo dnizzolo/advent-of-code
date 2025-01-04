@@ -13,7 +13,7 @@
    (lambda (number amount)
      (if (zerop number)
          (incf (gethash 1 blinked 0) amount)
-         (let ((digits (1+ (floor (log number 10)))))
+         (let ((digits (count-digits number)))
            (if (evenp digits)
                (let ((power (expt 10 (ash digits -1))))
                  (incf (gethash (floor number power) blinked 0) amount)

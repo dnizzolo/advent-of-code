@@ -5,6 +5,7 @@
    (:a :alexandria.2)
    (:q :queue))
   (:export
+   #:count-digits
    #:detect-cycle
    #:power-of-2-p
    #:with-memoization
@@ -25,6 +26,11 @@
    #:define-test))
 
 (in-package :aoc.utils)
+
+(defun count-digits (number &optional (base 10))
+  "Return the number of digits needed to represent NUMBER in base BASE."
+  (declare (type (integer 0) number))
+  (1+ (floor (log number base))))
 
 (defun detect-cycle (function initial-value &key (test #'eql))
   "Find a cycle in the sequence of iterated FUNCTION values, starting at

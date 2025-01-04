@@ -26,7 +26,7 @@
                   (rest operands)
                   include-concatenation))
             (and include-concatenation
-                 (let* ((digits (1+ (floor (log operand 10))))
+                 (let* ((digits (count-digits operand))
                         (power (expt 10 digits))
                         (lower (mod target power)))
                    (and (= lower operand)
