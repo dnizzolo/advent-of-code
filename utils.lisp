@@ -72,12 +72,12 @@ index at which the cycle starts and the first value in the cycle."
  naming an hash-table. If BODY exits by means of a non-local transfer
  of control, the associated return value is not cached in HASH-TABLE."
   (declare (type symbol hash-table))
-  (a:with-gensyms (table key value foundp)
+  (a:with-gensyms (table key value found-p)
     `(let ((,table ,hash-table)
            (,key (list ,@key-forms)))
-       (multiple-value-bind (,value ,foundp)
+       (multiple-value-bind (,value ,found-p)
            (gethash ,key ,table)
-         (if ,foundp
+         (if ,found-p
              ,value
              (setf (gethash ,key ,table)
                    (progn ,@body)))))))
@@ -96,12 +96,12 @@ Forms in KEY-FORMS may refer to parameters in the LAMBDA-LIST."
  under the key :MEMO."
   (flet ((memo (function)
            (let ((table (make-hash-table :test #'equal))
-                 (key-fn (or key-fn #'identity)))
+                 (key-fn (or key-fn (lambda (&rest args) args))))
              (setf (get name :memo) table)
              (lambda (&rest args)
-               (multiple-value-bind (value foundp)
+               (multiple-value-bind (value found-p)
                    (gethash (apply key-fn args) table)
-                 (if foundp
+                 (if found-p
                      value
                      (setf (gethash (apply key-fn args) table)
                            (apply function args))))))))
