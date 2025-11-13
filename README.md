@@ -1,6 +1,7 @@
 # Advent of Code
 
-My solutions to [Advent of Code](https://adventofcode.com/).
+Solutions to [Advent of Code](https://adventofcode.com/) in Common
+Lisp.
 
 ## Structure
 

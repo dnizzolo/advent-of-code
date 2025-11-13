@@ -1,48 +1,33 @@
 (defpackage :aoc2021.10
   (:documentation "Syntax Scoring.")
+  (:local-nicknames (:a :alexandria.2))
   (:use :cl :aoc.utils))
 
 (in-package :aoc2021.10)
 
 (defun read-navigation-lines (&optional (relative-path #p"2021/inputs/day10.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
-    (with-open-file (in filename)
-      (loop for line = (read-line in nil)
-            while line
-            collect line))))
+    (uiop:read-file-lines filename)))
 
 (defvar *matching-character*
-  #.(let ((tbl (make-hash-table)))
-      (loop for (key . value) in '((#\( . #\)) (#\[ . #\]) (#\{ . #\}) (#\< . #\>))
-            do (setf (gethash key tbl) value))
-      tbl))
+  (a:alist-hash-table '((#\( . #\)) (#\[ . #\]) (#\{ . #\}) (#\< . #\>))))
 
 (defvar *illegal-character-score*
-  #.(let ((tbl (make-hash-table)))
-      (loop for (key . value) in '((#\) . 3) (#\] . 57) (#\} . 1197) (#\> . 25137))
-            do (setf (gethash key tbl) value))
-      tbl))
+  (a:alist-hash-table '((#\) . 3) (#\] . 57) (#\} . 1197) (#\> . 25137))))
 
 (defvar *completion-score*
-  #.(let ((tbl (make-hash-table)))
-      (loop for (key . value) in '((#\) . 1) (#\] . 2) (#\} . 3) (#\> . 4))
-            do (setf (gethash key tbl) value))
-      tbl))
+  (a:alist-hash-table '((#\) . 1) (#\] . 2) (#\} . 3) (#\> . 4))))
 
 (defun corrupted-line-p (line &aux stack)
-  (loop for char across line
-        if (gethash char *matching-character*)
-          do (push char stack)
-        else
-          unless (char= (gethash (pop stack) *matching-character*) char)
-            return (gethash char *illegal-character-score*)))
+  (loop for char across line do
+    (cond ((gethash char *matching-character*)
+           (push char stack))
+          ((char/= (gethash (pop stack) *matching-character*) char)
+           (return (gethash char *illegal-character-score*))))))
 
 (defun incomplete-line-p (line &aux stack)
-  (loop for char across line
-        if (member char '(#\( #\[ #\{ #\<))
-          do (push char stack)
-        else
-          do (pop stack))
+  (loop for char across line do
+    (if (member char '(#\( #\[ #\{ #\<)) (push char stack) (pop stack)))
   (mapcar (lambda (char) (gethash char *matching-character*)) stack))
 
 (defun completion-score (completion)
@@ -62,8 +47,7 @@
          (sorted (sort scores #'<)))
     (nth (ash (length sorted) -1) sorted)))
 
-(defun day10 ()
-  (let ((lines (read-navigation-lines)))
-    (values (day10/part-1 lines) (day10/part-2 lines))))
+(defun day10 (&aux (lines (read-navigation-lines)))
+  (values (day10/part-1 lines) (day10/part-2 lines)))
 
 (define-test (= 316851) (= 2182912364))

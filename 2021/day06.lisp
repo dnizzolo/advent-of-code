@@ -24,10 +24,9 @@
            (setf zero-index (mod (1+ zero-index) 9))
         finally (return (reduce #'+ fishes))))
 
-(defun day06 ()
-  (let ((fish-list (read-lanternfish-initial-population)))
-    (values
-     (evolve-fishes fish-list 80)
-     (evolve-fishes fish-list 256))))
+(defun day06 (&aux (fish-list (read-lanternfish-initial-population)))
+  (values
+   (evolve-fishes fish-list 80)
+   (evolve-fishes fish-list 256)))
 
 (define-test (= 377263) (= 1695929023803))

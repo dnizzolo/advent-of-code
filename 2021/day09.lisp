@@ -57,8 +57,7 @@
          (sorted (sort sizes #'>)))
     (* (first sorted) (second sorted) (third sorted))))
 
-(defun day09 ()
-  (let ((caves (read-caves)))
-    (values (day09/part-1 caves) (day09/part-2 caves))))
+(defun day09 (&aux (caves (read-caves)))
+  (values (day09/part-1 caves) (day09/part-2 caves)))
 
 (define-test (= 498) (= 1071000))
