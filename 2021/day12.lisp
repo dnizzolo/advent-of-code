@@ -40,8 +40,7 @@
                               finally (pop path)))))))
     (loop for adj in (gethash start adj-list) sum (count-paths adj nil))))
 
-(defun day12 ()
-  (let ((adj-list (read-caves-graph)))
-    (values (day12/part-1 adj-list) (day12/part-2 adj-list))))
+(defun day12 (&aux (adj-list (read-caves-graph)))
+  (values (day12/part-1 adj-list) (day12/part-2 adj-list)))
 
 (define-test (= 4011) (= 108035))

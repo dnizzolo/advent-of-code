@@ -4,13 +4,13 @@
 
 (in-package :aoc2021.02)
 
-(defun read-submarine-commands ()
+(defun read-submarine-commands (&optional (relative-path #p"2021/inputs/day02.txt"))
   (mapcar (lambda (line)
             (let ((spl (uiop:split-string line)))
               (list (intern (string-upcase (car spl)) :keyword)
                     (parse-integer (cadr spl)))))
           (uiop:read-file-lines
-           (asdf:system-relative-pathname :advent-of-code #p"2021/inputs/day02.txt"))))
+           (asdf:system-relative-pathname :advent-of-code relative-path))))
 
 (defun day02/part-1 (commands &aux (horiz 0) (depth 0))
   (dolist (comm commands (* horiz depth))
@@ -30,8 +30,7 @@
         (:up (decf aim step))
         (:down (incf aim step))))))
 
-(defun day02 ()
-  (let ((commands (read-submarine-commands)))
-    (values (day02/part-1 commands) (day02/part-2 commands))))
+(defun day02 (&aux (commands (read-submarine-commands)))
+  (values (day02/part-1 commands) (day02/part-2 commands)))
 
 (define-test (= 2150351) (= 1842742223))

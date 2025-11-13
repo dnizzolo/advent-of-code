@@ -4,10 +4,10 @@
 
 (in-package :aoc2021.03)
 
-(defun read-diagnostic-report (path)
+(defun read-diagnostic-report (&optional (relative-path #p"2021/inputs/day03.txt"))
   (mapcar #'string->bit-vector
           (uiop:read-file-lines
-           (asdf:system-relative-pathname :advent-of-code path))))
+           (asdf:system-relative-pathname :advent-of-code relative-path))))
 
 (defun string->bit-vector (s)
   (make-array (length s) :element-type 'bit :initial-contents (map 'list #'digit-char-p s)))
@@ -46,8 +46,7 @@
   (* (bit-vector->integer (find-oxygen-generator-rating diagnostics))
      (bit-vector->integer (find-carbon-dioxide-scrubber-rating diagnostics))))
 
-(defun day03 ()
-  (let ((diagns (read-diagnostic-report #p"2021/inputs/day03.txt")))
-    (values (day03/part-1 diagns) (day03/part-2 diagns))))
+(defun day03 (&aux (diagns (read-diagnostic-report)))
+  (values (day03/part-1 diagns) (day03/part-2 diagns)))
 
 (define-test (= 845186) (= 4636702))

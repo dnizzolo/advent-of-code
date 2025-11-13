@@ -84,8 +84,7 @@
                     digits
                     :key (lambda (dgt) (decode-signal decoder dgt)))))
 
-(defun day08 ()
-  (let ((patterns (read-signal-patterns)))
-    (values (day08/part-1 patterns) (day08/part-2 patterns))))
+(defun day08 (&aux (patterns (read-signal-patterns)))
+  (values (day08/part-1 patterns) (day08/part-2 patterns)))
 
 (define-test (= 548) (= 1074888))

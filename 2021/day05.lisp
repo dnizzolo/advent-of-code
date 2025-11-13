@@ -4,14 +4,14 @@
 
 (in-package :aoc2021.05)
 
-(defun read-hydrovents (&optional (rel-path #p"2021/inputs/day05.txt")
-                        &aux (filename (asdf:system-relative-pathname :advent-of-code rel-path)))
-  (mapcar (lambda (lis)
-            (destructuring-bind (x1 y1 x2 y2) lis
-              (list (list x1 y1) (list x2 y2))))
-          (with-open-file (in filename)
-            (loop for line = (read-line in nil)
-                  while line collect (parse-integers line)))))
+(defun read-hydrovents (&optional (relative-path #p"2021/inputs/day05.txt"))
+  (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
+    (mapcar (lambda (lis)
+              (destructuring-bind (x1 y1 x2 y2) lis
+                (list (list x1 y1) (list x2 y2))))
+            (with-open-file (in filename)
+              (loop for line = (read-line in nil)
+                    while line collect (parse-integers line))))))
 
 (defun straightp (pair)
   (or (= (caar pair) (caadr pair)) (= (cadar pair) (cadadr pair))))
@@ -52,10 +52,9 @@
 (defun count-overlapping-points (tbl)
   (loop for v being the hash-values of tbl count (> v 1)))
 
-(defun day05 ()
-  (let ((vents (read-hydrovents)))
-    (values
-     (count-overlapping-points (make-straight-hydrovents-hash-table vents))
-     (count-overlapping-points (make-hydrovents-hash-table vents)))))
+(defun day05 (&aux (vents (read-hydrovents)))
+  (values
+   (count-overlapping-points (make-straight-hydrovents-hash-table vents))
+   (count-overlapping-points (make-hydrovents-hash-table vents))))
 
 (define-test (= 5373) (= 21514))
