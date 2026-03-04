@@ -1,9 +1,9 @@
-(defpackage :aoc2023.08
+(defpackage #:aoc2023.08
   (:documentation "Haunted Wastelands.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.08)
+(in-package #:aoc2023.08)
 
 (defun read-network (&optional (relative-pathname #p"2023/inputs/day08.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

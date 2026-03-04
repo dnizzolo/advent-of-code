@@ -1,8 +1,8 @@
-(defpackage :aoc2023.02
+(defpackage #:aoc2023.02
   (:documentation "Cube Conundrum.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.02)
+(in-package #:aoc2023.02)
 
 (defun read-games (&optional (relative-pathname #p"2023/inputs/day02.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

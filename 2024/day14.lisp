@@ -1,12 +1,12 @@
-(defpackage :aoc2024.14
+(defpackage #:aoc2024.14
   (:documentation "Restroom Redoubt.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.14)
+(in-package #:aoc2024.14)
 
 (defun read-robots (&optional (relative-pathname #p"2024/inputs/day14.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
-    (mapcar #'parse-integers (uiop:read-file-lines filename))))
+    (mapcar #'parse-all-integers (uiop:read-file-lines filename))))
 
 (defconstant +height+ 103)
 (defconstant +width+ 101)

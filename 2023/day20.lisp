@@ -1,9 +1,9 @@
-(defpackage :aoc2023.20
+(defpackage #:aoc2023.20
   (:documentation "Pulse Propagation.")
-  (:local-nicknames (:a :alexandria.2) (:q :queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2) (#:q #:queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.20)
+(in-package #:aoc2023.20)
 
 (defun read-module-configuration (&optional (relative-pathname #p"2023/inputs/day20.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

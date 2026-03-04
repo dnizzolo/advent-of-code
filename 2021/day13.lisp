@@ -1,9 +1,9 @@
-(defpackage :aoc2021.13
+(defpackage #:aoc2021.13
   (:documentation "Transparent Origami.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.13)
+(in-package #:aoc2021.13)
 
 (defun read-origami (&optional (relative-path #p"2021/inputs/day13.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path))
@@ -12,11 +12,11 @@
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while (plusp (length line))
-            for (x y) = (parse-integers line)
+            for (x y) = (parse-all-integers line)
             do (setf (gethash (list x y) paper) t))
       (setf insts (loop for line = (read-line in nil)
                         while line
-                        for coord = (first (parse-integers line))
+                        for coord = (first (parse-all-integers line))
                         collect (list (if (find #\x line) :left :up) coord))))
     (values paper insts)))
 
@@ -56,8 +56,8 @@
             (day13/part-2 paper instructions))))
 
 (define-test
-    (= 724)
-    (string= "
+  (= 724)
+  (string= "
 .██..███....██.███..████.███..█..█.█...
 █..█.█..█....█.█..█.█....█..█.█..█.█...
 █....█..█....█.███..███..█..█.█..█.█...

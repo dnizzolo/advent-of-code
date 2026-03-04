@@ -1,8 +1,8 @@
-(defpackage :aoc2021.18
+(defpackage #:aoc2021.18
   (:documentation "Snailfish.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.18)
+(in-package #:aoc2021.18)
 
 (defun read-snailfish-numbers (&optional (relative-pathname #p"2021/inputs/day18.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

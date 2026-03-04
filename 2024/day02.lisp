@@ -1,15 +1,15 @@
-(defpackage :aoc2024.02
+(defpackage #:aoc2024.02
   (:documentation "Red-Nosed Reports.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.02)
+(in-package #:aoc2024.02)
 
 (defun read-reports (&optional (relative-pathname #p"2024/inputs/day02.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            collect (parse-integers line)))))
+            collect (parse-all-integers line)))))
 
 (defun safe-report-p (report)
   (and (or (apply #'< report)

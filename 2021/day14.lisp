@@ -1,8 +1,8 @@
-(defpackage :aoc2021.14
+(defpackage #:aoc2021.14
   (:documentation "Extended Polymerization.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.14)
+(in-package #:aoc2021.14)
 
 (defun read-polymerization (&optional (relative-path #p"2021/inputs/day14.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path))

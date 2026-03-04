@@ -1,9 +1,9 @@
-(defpackage :aoc2021.17
+(defpackage #:aoc2021.17
   (:documentation "Trick Shot.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.17)
+(in-package #:aoc2021.17)
 
 (defstruct (target-area (:constructor %make-target-area) (:conc-name nil))
   x-min x-max
@@ -16,7 +16,7 @@
 (defun read-target-area (&optional (relative-pathname #p"2021/inputs/day17.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (apply #'make-target-area
-           (parse-integers (uiop:read-file-string filename)))))
+           (parse-all-integers (uiop:read-file-string filename)))))
 
 (defstruct (probe (:conc-name nil))
   (x-position 0) (y-position 0)

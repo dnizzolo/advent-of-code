@@ -1,9 +1,9 @@
-(defpackage :aoc2023.07
+(defpackage #:aoc2023.07
   (:documentation "Camel Cards.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.07)
+(in-package #:aoc2023.07)
 
 (defun read-hands-and-bids (&optional (relative-pathname #p"2023/inputs/day07.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

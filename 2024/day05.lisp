@@ -1,8 +1,8 @@
-(defpackage :aoc2024.05
+(defpackage #:aoc2024.05
   (:documentation "Print Queue.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.05)
+(in-package #:aoc2024.05)
 
 (defun read-pages (&optional (relative-pathname #p"2024/inputs/day05.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
@@ -10,11 +10,11 @@
       (loop with before = (make-hash-table)
             initially (loop for line = (read-line in nil)
                             while (plusp (length line))
-                            for (left right) = (parse-integers line)
+                            for (left right) = (parse-all-integers line)
                             do (push left (gethash right before nil)))
             for line = (read-line in nil)
             while line
-            collect (coerce (parse-integers line) 'vector) into updates
+            collect (coerce (parse-all-integers line) 'vector) into updates
             finally (return (values before (coerce updates 'vector)))))))
 
 (defun correct-update-p (before update &aux (length (length update)))

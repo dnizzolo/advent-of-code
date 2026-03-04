@@ -1,9 +1,9 @@
-(defpackage :aoc2022.10
+(defpackage #:aoc2022.10
   (:documentation "Cathode-Ray Tube.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.10)
+(in-package #:aoc2022.10)
 
 (defclass instruction ()
   ((cycles :reader cycles)))
@@ -71,8 +71,8 @@
            (terpri out)))))))
 
 (define-test
-    (= 11820)
-    (string= "
+  (= 11820)
+  (string= "
 ████.███....██.███..███..█..█..██..█..█.
 █....█..█....█.█..█.█..█.█.█..█..█.█..█.
 ███..█..█....█.███..█..█.██...█..█.████.

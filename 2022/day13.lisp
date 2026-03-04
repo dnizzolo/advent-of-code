@@ -1,8 +1,8 @@
-(defpackage :aoc2022.13
+(defpackage #:aoc2022.13
   (:documentation "Distress Signal.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.13)
+(in-package #:aoc2022.13)
 
 (defun read-packets (&optional (relative-pathname #p"2022/inputs/day13.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

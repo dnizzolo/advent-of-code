@@ -1,15 +1,15 @@
-(defpackage :aoc2022.14
+(defpackage #:aoc2022.14
   (:documentation "Regolith Reservoir.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.14)
+(in-package #:aoc2022.14)
 
 (defun read-cave-structure (&optional (relative-pathname #p"2022/inputs/day14.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))
         (cave (make-hash-table :test #'equal)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil) while line do
-        (loop for (xi yi xf yf) on (parse-integers line) by #'cddr
+        (loop for (xi yi xf yf) on (parse-all-integers line) by #'cddr
               while yf
               do (cond ((= xi xf)
                         (loop for i from (min yi yf) to (max yi yf) do

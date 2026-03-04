@@ -1,9 +1,9 @@
-(defpackage :aoc2021.04
+(defpackage #:aoc2021.04
   (:documentation "Giant Squid.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.04)
+(in-package #:aoc2021.04)
 
 (defclass bingo-board ()
   ((numbers :initarg :board-numbers :accessor bingo-board-numbers)
@@ -53,11 +53,11 @@
 (defun read-bingo-game (&optional (rel-path #p"2021/inputs/day04.txt")
                         &aux (filename (asdf:system-relative-pathname :advent-of-code rel-path)))
   (with-open-file (in filename)
-    (values (parse-integers (prog1 (read-line in nil) (read-line in nil)))
+    (values (parse-all-integers (prog1 (read-line in nil) (read-line in nil)))
             (loop while (listen in)
                   collect (make-bingo-board (loop for line = (read-line in nil)
                                                   while (plusp (length line))
-                                                  collect (parse-integers line)))))))
+                                                  collect (parse-all-integers line)))))))
 
 (defun day04/part-1 (extractions boards)
   (loop named outer for number in extractions

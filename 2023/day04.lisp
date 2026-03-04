@@ -1,8 +1,8 @@
-(defpackage :aoc2023.04
+(defpackage #:aoc2023.04
   (:documentation "Scratchcards.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.04)
+(in-package #:aoc2023.04)
 
 (defun read-scratchcards (&optional (relative-pathname #p"2023/inputs/day04.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
@@ -11,11 +11,11 @@
             while line
             collect (length
                      (intersection
-                      (parse-integers line
-                                      :start (position #\: line)
-                                      :end (position #\| line))
-                      (parse-integers line
-                                      :start (position #\| line))))))))
+                      (parse-all-integers line
+                                          :start (position #\: line)
+                                          :end (position #\| line))
+                      (parse-all-integers line
+                                          :start (position #\| line))))))))
 
 (defun scratchcards-points (scratchcards)
   (loop for wins in scratchcards sum (ash 1 (1- wins))))

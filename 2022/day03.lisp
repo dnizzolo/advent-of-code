@@ -1,8 +1,8 @@
-(defpackage :aoc2022.03
+(defpackage #:aoc2022.03
   (:documentation "Rucksack Reorganization.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.03)
+(in-package #:aoc2022.03)
 
 (defun read-rucksack-contents (&optional (relative-pathname #p"2022/inputs/day03.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

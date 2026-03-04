@@ -1,9 +1,9 @@
-(defpackage :aoc2023.21
+(defpackage #:aoc2023.21
   (:documentation "Step Counter.")
-  (:local-nicknames (:q :queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:q #:queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.21)
+(in-package #:aoc2023.21)
 
 (defun read-garden (&optional (relative-pathname #p"2023/inputs/day21.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))

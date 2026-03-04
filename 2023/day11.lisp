@@ -1,9 +1,9 @@
-(defpackage :aoc2023.11
+(defpackage #:aoc2023.11
   (:documentation "Cosmic Expansion.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.11)
+(in-package #:aoc2023.11)
 
 (defun read-galaxies (&optional (relative-pathname #p"2023/inputs/day11.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

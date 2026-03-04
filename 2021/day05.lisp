@@ -1,8 +1,8 @@
-(defpackage :aoc2021.05
+(defpackage #:aoc2021.05
   (:documentation "Hydrothermal Venture.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.05)
+(in-package #:aoc2021.05)
 
 (defun read-hydrovents (&optional (relative-path #p"2021/inputs/day05.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
@@ -11,7 +11,7 @@
                 (list (list x1 y1) (list x2 y2))))
             (with-open-file (in filename)
               (loop for line = (read-line in nil)
-                    while line collect (parse-integers line))))))
+                    while line collect (parse-all-integers line))))))
 
 (defun straightp (pair)
   (or (= (caar pair) (caadr pair)) (= (cadar pair) (cadadr pair))))

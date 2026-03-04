@@ -1,8 +1,8 @@
-(defpackage :aoc2022.06
+(defpackage #:aoc2022.06
   (:documentation "Tuning Trouble.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.06)
+(in-package #:aoc2022.06)
 
 (defun read-datastream-buffer (&optional (relative-pathname #p"2022/inputs/day06.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

@@ -1,8 +1,8 @@
-(defpackage :aoc2023.13
+(defpackage #:aoc2023.13
   (:documentation "Point of Incidence.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.13)
+(in-package #:aoc2023.13)
 
 (defun read-patterns (&optional (relative-pathname #p"2023/inputs/day13.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

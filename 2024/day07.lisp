@@ -1,15 +1,15 @@
-(defpackage :aoc2024.07
+(defpackage #:aoc2024.07
   (:documentation "Bridge Repair.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.07)
+(in-package #:aoc2024.07)
 
 (defun read-equations (&optional (relative-pathname #p"2024/inputs/day07.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            collect (parse-integers line)))))
+            collect (parse-all-integers line)))))
 
 (defun valid-equation-p (target operands &optional include-concatenation)
   (if (null operands)

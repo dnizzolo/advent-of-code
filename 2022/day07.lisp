@@ -1,9 +1,9 @@
-(defpackage :aoc2022.07
+(defpackage #:aoc2022.07
   (:documentation "No Space Left On Device.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.07)
+(in-package #:aoc2022.07)
 
 (defclass entry ()
   ((name :initarg :name :accessor name))

@@ -1,8 +1,8 @@
-(defpackage :aoc2024.09
+(defpackage #:aoc2024.09
   (:documentation "Disk Fragmenter.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.09)
+(in-package #:aoc2024.09)
 
 (defun read-disk-map (&optional (relative-pathname #p"2024/inputs/day09.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

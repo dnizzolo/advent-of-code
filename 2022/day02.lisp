@@ -1,8 +1,8 @@
-(defpackage :aoc2022.02
+(defpackage #:aoc2022.02
   (:documentation "Rock Paper Scissors.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.02)
+(in-package #:aoc2022.02)
 
 (defun read-rock-paper-scissors-strategy (&optional (relative-pathname #p"2022/inputs/day02.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

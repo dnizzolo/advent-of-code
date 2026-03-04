@@ -1,9 +1,9 @@
-(defpackage :aoc2023.12
+(defpackage #:aoc2023.12
   (:documentation "Hot Springs.")
-  (:local-nicknames (:s :serapeum))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:s #:serapeum))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.12)
+(in-package #:aoc2023.12)
 
 (defun read-records (&optional (relative-pathname #p"2023/inputs/day12.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
@@ -12,7 +12,7 @@
             while line
             for p = (position #\Space line)
             collect (cons (subseq line 0 p)
-                          (coerce (parse-integers line :start (1+ p)) '(vector fixnum)))))))
+                          (coerce (parse-all-integers line :start (1+ p)) '(vector fixnum)))))))
 
 (defun count-arrangements (configuration groups
                            &aux

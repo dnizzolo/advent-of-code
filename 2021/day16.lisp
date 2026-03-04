@@ -1,8 +1,8 @@
-(defpackage :aoc2021.16
+(defpackage #:aoc2021.16
   (:documentation "Packet Decoder.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.16)
+(in-package #:aoc2021.16)
 
 (defun read-packet (&optional (relative-pathname #p"2021/inputs/day16.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

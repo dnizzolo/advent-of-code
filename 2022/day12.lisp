@@ -1,9 +1,9 @@
-(defpackage :aoc2022.12
+(defpackage #:aoc2022.12
   (:documentation "Hill Climbing Algorithm.")
-  (:local-nicknames (:q :queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:q #:queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.12)
+(in-package #:aoc2022.12)
 
 (defun read-heightmap (&optional (relative-pathname #p"2022/inputs/day12.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

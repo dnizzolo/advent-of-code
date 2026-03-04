@@ -1,16 +1,16 @@
-(defpackage :aoc2021.07
+(defpackage #:aoc2021.07
   (:documentation "The Treachery of Whales.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.07)
+(in-package #:aoc2021.07)
 
 ;;;; Solved the optimization problems by hand.
 
 (defun read-crab-positions (&optional (rel-path #p"2021/inputs/day07.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code rel-path)))
     (with-open-file (in filename)
-      (parse-integers (read-line in)))))
+      (parse-all-integers (read-line in)))))
 
 (defun day07/part-1 (crabs)
   (loop with median = (a:median crabs)

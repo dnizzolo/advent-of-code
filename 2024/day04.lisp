@@ -1,8 +1,8 @@
-(defpackage :aoc2024.04
+(defpackage #:aoc2024.04
   (:documentation "Ceres Search.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.04)
+(in-package #:aoc2024.04)
 
 (defun read-word-search (&optional (relative-pathname #p"2024/inputs/day04.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

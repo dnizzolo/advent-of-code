@@ -1,16 +1,16 @@
-(defpackage :aoc2022.15
+(defpackage #:aoc2022.15
   (:documentation "Beacon Exclusion Zone.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.15)
+(in-package #:aoc2022.15)
 
 (defun read-sensors (&optional (relative-pathname #p"2022/inputs/day15.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            for ints = (parse-integers line)
+            for ints = (parse-all-integers line)
             collect (cons (apply #'manhattan-distance ints) ints)))))
 
 (defun manhattan-distance (x1 y1 x2 y2) (+ (abs (- x1 x2)) (abs (- y1 y2))))

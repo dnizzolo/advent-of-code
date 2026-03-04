@@ -1,8 +1,8 @@
-(defpackage :aoc2021.12
+(defpackage #:aoc2021.12
   (:documentation "Passage Pathing.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.12)
+(in-package #:aoc2021.12)
 
 (defun read-caves-graph (&optional (relative-path #p"2021/inputs/day12.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path))

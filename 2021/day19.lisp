@@ -1,9 +1,9 @@
-(defpackage :aoc2021.19
+(defpackage #:aoc2021.19
   (:documentation "Beacon Scanner.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.19)
+(in-package #:aoc2021.19)
 
 (defun read-scanners (&optional (relative-path #p"2021/inputs/day19.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
@@ -12,7 +12,7 @@
             for points = (loop initially (read-line in nil)
                                for line = (read-line in nil)
                                while (plusp (length line))
-                               collect (coerce (parse-integers line) 'vector)
+                               collect (coerce (parse-all-integers line) 'vector)
                                  into inter-result
                                finally (return (coerce inter-result 'vector)))
             while (plusp (length points))

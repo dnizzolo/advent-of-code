@@ -1,8 +1,8 @@
-(defpackage :aoc2022.01
+(defpackage #:aoc2022.01
   (:documentation "Calorie Counting.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.01)
+(in-package #:aoc2022.01)
 
 (defun read-calories (&optional (relative-pathname #p"2022/inputs/day01.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

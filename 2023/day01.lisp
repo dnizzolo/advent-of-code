@@ -1,9 +1,9 @@
-(defpackage :aoc2023.01
+(defpackage #:aoc2023.01
   (:documentation "Trebuchet?!")
-  (:local-nicknames (:s :serapeum))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:s #:serapeum))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.01)
+(in-package #:aoc2023.01)
 
 (defun read-calibration-document (&optional (relative-pathname #p"2023/inputs/day01.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

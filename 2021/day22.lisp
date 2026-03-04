@@ -1,8 +1,8 @@
-(defpackage :aoc2021.22
+(defpackage #:aoc2021.22
   (:documentation "Reactor Reboot.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.22)
+(in-package #:aoc2021.22)
 
 (defstruct (cuboid (:constructor %make-cuboid) (:conc-name nil))
   x-low x-high
@@ -57,7 +57,7 @@
       (loop for line = (read-line in nil)
             while line
             collect (list (char= (char line 1) #\n)
-                          (apply #'make-cuboid (parse-integers line)))))))
+                          (apply #'make-cuboid (parse-all-integers line)))))))
 
 (defun initialization-procedure (steps)
   (flet ((lower-bound (coordinate) (max -50 coordinate))

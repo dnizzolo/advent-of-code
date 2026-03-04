@@ -1,9 +1,9 @@
-(defpackage :aoc2023.25
+(defpackage #:aoc2023.25
   (:documentation "Snowverload.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.25)
+(in-package #:aoc2023.25)
 
 (defun read-graph (&optional (relative-pathname #p"2023/inputs/day25.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

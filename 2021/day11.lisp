@@ -1,8 +1,8 @@
-(defpackage :aoc2021.11
+(defpackage #:aoc2021.11
   (:documentation "Dumbo Octopus.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.11)
+(in-package #:aoc2021.11)
 
 (defun read-dumbo-octopuses (&optional (relative-path #p"2021/inputs/day11.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code relative-path))

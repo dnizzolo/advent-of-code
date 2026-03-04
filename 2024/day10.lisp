@@ -1,9 +1,9 @@
-(defpackage :aoc2024.10
+(defpackage #:aoc2024.10
   (:documentation "Hoof It.")
-  (:local-nicknames (:q :queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:q #:queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.10)
+(in-package #:aoc2024.10)
 
 (defun read-map (&optional (relative-pathname #p"2024/inputs/day10.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

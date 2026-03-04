@@ -1,9 +1,9 @@
-(defpackage :aoc2021.10
+(defpackage #:aoc2021.10
   (:documentation "Syntax Scoring.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.10)
+(in-package #:aoc2021.10)
 
 (defun read-navigation-lines (&optional (relative-path #p"2021/inputs/day10.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))

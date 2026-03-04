@@ -1,8 +1,8 @@
-(defpackage :aoc2023.14
+(defpackage #:aoc2023.14
   (:documentation "Parabolic Reflector Dish.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.14)
+(in-package #:aoc2023.14)
 
 (defun read-platform (&optional (relative-pathname #p"2023/inputs/day14.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

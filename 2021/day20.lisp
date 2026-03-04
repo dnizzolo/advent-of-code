@@ -1,8 +1,8 @@
-(defpackage :aoc2021.20
+(defpackage #:aoc2021.20
   (:documentation "Trench Map.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.20)
+(in-package #:aoc2021.20)
 
 (defun read-algorithm-and-image (&optional (relative-path #p"2021/inputs/day20.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))

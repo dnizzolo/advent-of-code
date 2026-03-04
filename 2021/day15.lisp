@@ -1,9 +1,9 @@
-(defpackage :aoc2021.15
+(defpackage #:aoc2021.15
   (:documentation "Chiton.")
-  (:local-nicknames (:pq :min-priority-queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:pq #:min-priority-queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.15)
+(in-package #:aoc2021.15)
 
 (defun read-risk-levels (&optional (relative-path #p"2021/inputs/day15.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code relative-path))

@@ -1,15 +1,15 @@
-(defpackage :aoc2021.21
+(defpackage #:aoc2021.21
   (:documentation "Dirac Dice.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.21)
+(in-package #:aoc2021.21)
 
 (defun read-starting-space (&optional (relative-path #p"2021/inputs/day21.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))
     (values-list
      (mapcar
-      (lambda (line) (second (parse-integers line)))
+      (lambda (line) (second (parse-all-integers line)))
       (uiop:read-file-lines filename)))))
 
 (defun play-deterministic-game (position-1 position-2)

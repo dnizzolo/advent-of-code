@@ -1,8 +1,8 @@
-(defpackage :aoc2024.03
+(defpackage #:aoc2024.03
   (:documentation "Mull It Over.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.03)
+(in-package #:aoc2024.03)
 
 (defun read-memory (&optional (relative-pathname #p"2024/inputs/day03.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

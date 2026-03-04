@@ -1,8 +1,8 @@
-(defpackage :aoc2024.19
+(defpackage #:aoc2024.19
   (:documentation "Linen Layout.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.19)
+(in-package #:aoc2024.19)
 
 (defun read-patterns-and-designs (&optional (relative-pathname #p"2024/inputs/day19.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

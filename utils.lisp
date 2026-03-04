@@ -1,9 +1,9 @@
-(defpackage :aoc.utils
+(defpackage #:aoc.utils
   (:documentation "Utilities for Advent of Code.")
-  (:use :cl)
+  (:use #:cl)
   (:local-nicknames
-   (:a :alexandria.2)
-   (:q :queue))
+   (#:a #:alexandria.2)
+   (#:q #:queue))
   (:export
    #:count-digits
    #:detect-cycle
@@ -17,7 +17,7 @@
    #:list->queue
    #:all-different-p
    #:all-same-p
-   #:parse-integers
+   #:parse-all-integers
    #:triangular
    #:bit-vector->integer
    #:extended-gcd
@@ -25,7 +25,7 @@
    #:chinese-remainder-theorem
    #:define-test))
 
-(in-package :aoc.utils)
+(in-package #:aoc.utils)
 
 (defun count-digits (number &optional (base 10))
   "Return the number of digits needed to represent NUMBER in base BASE."
@@ -112,22 +112,10 @@ Forms in KEY-FORMS may refer to parameters in the LAMBDA-LIST."
   (let ((table (get name :memo)))
     (when table (clrhash table))))
 
-(defgeneric make-counter (bag &key key test)
-  (:documentation "Return an hash-table that maps the items in BAG to their counts."))
-
-(defmethod make-counter ((bag list) &key key (test #'eql))
-  (loop with counter = (make-hash-table :test test)
-        with key-fn = (or key #'identity)
-        for item in bag
-        do (incf (gethash (funcall key-fn item) counter 0))
-        finally (return counter)))
-
-(defmethod make-counter ((bag vector) &key key (test #'eql))
-  (loop with counter = (make-hash-table :test test)
-        with key-fn = (or key #'identity)
-        for item across bag
-        do (incf (gethash (funcall key-fn item) counter 0))
-        finally (return counter)))
+(defun make-counter (bag &key (key #'identity) (test #'eql))
+  (let ((counter (make-hash-table :test test)))
+    (map nil (lambda (item) (incf (gethash (funcall key item) counter 0))) bag)
+    counter))
 
 (defun position-2d (item array &key (test #'eql))
   "Find the first position in ARRAY which is equal to ITEM as defined by
@@ -148,29 +136,34 @@ occurrence as multiple values."
           collect (loop for j below n
                         collect (aref array i j)))))
 
-(defun list->queue (list &aux (q (q:make-queue (length list))))
+(defun list->queue (list)
   "Create a queue with the elements of LIST in the order they appear."
-  (dolist (item list q) (q:enqueue q item)))
+  (let ((q (q:make-queue (length list))))
+    (dolist (item list q)
+      (q:enqueue q item))))
 
 (defun all-different-p (sequence &key (test #'eql))
   "Check if the elements in SEQUENCE are all different, i.e., SEQUENCE
 is a set."
   (every (lambda (item) (= 1 (count item sequence :test test))) sequence))
 
-(defun all-same-p (sequence &key (test #'eql) &aux (len (length sequence)))
+(defun all-same-p (sequence &key (test #'eql))
   "Check if the elements in SEQUENCE are all the same."
-  (or (zerop len) (= len (count (elt sequence 0) sequence :test test))))
+  (let ((length (length sequence)))
+    (or (zerop length) (= length (count (elt sequence 0) sequence :test test)))))
 
-(defun parse-integers (string &key (start 0) end (radix 10))
+(defun parse-all-integers (string &key (start 0) (end (length string)) (radix 10))
   "Parse all the integers in STRING ignoring other contents and return
 them in a list."
   (declare (type string string))
-  (loop with start = start
-        with end = (or end (length string))
-        with parse with next-start
-        while (< start end)
-        do (multiple-value-setq (parse next-start)
-             (parse-integer string :start start :end end :radix radix :junk-allowed t))
+  (loop while (< start end)
+        for (parse next-start) = (multiple-value-list
+                                  (parse-integer
+                                   string
+                                   :start start
+                                   :end end
+                                   :radix radix
+                                   :junk-allowed t))
         if parse
           collect it and do (setf start next-start)
         else

@@ -1,8 +1,8 @@
-(defpackage :aoc2021.01
+(defpackage #:aoc2021.01
   (:documentation "Sonar Sweep.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.01)
+(in-package #:aoc2021.01)
 
 (defun read-sonar-depths (&optional (relative-path #p"2021/inputs/day01.txt"))
   (mapcar #'parse-integer

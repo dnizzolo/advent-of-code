@@ -1,8 +1,8 @@
-(defpackage :aoc2023.03
+(defpackage #:aoc2023.03
   (:documentation "Gear Ratios.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.03)
+(in-package #:aoc2023.03)
 
 (defun read-engine-schematic (&optional (relative-pathname #p"2023/inputs/day03.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))

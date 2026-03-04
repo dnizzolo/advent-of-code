@@ -1,8 +1,8 @@
-(defpackage :aoc2021.02
+(defpackage #:aoc2021.02
   (:documentation "Dive!")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.02)
+(in-package #:aoc2021.02)
 
 (defun read-submarine-commands (&optional (relative-path #p"2021/inputs/day02.txt"))
   (mapcar (lambda (line)

@@ -1,8 +1,8 @@
-(defpackage :aoc2024.06
+(defpackage #:aoc2024.06
   (:documentation "Guard Gallivant.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.06)
+(in-package #:aoc2024.06)
 
 (defun read-map (&optional (relative-pathname #p"2024/inputs/day06.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

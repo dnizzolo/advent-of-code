@@ -1,8 +1,8 @@
-(defpackage :aoc2023.18
+(defpackage #:aoc2023.18
   (:documentation "Lavaduct Lagoon.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.18)
+(in-package #:aoc2023.18)
 
 (defun read-dig-plan (&optional (relative-pathname #p"2023/inputs/day18.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

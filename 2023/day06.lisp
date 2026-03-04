@@ -1,8 +1,8 @@
-(defpackage :aoc2023.06
+(defpackage #:aoc2023.06
   (:documentation "Wait For It.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.06)
+(in-package #:aoc2023.06)
 
 (defun read-time-table (&optional single-race-p (relative-pathname #p"2023/inputs/day06.txt"))
   (flet ((read-line-for-table (stream)
@@ -10,8 +10,8 @@
              (if single-race-p (delete #\Space s) s))))
     (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
       (with-open-file (in filename)
-        (let ((time (parse-integers (read-line-for-table in)))
-              (distance (parse-integers (read-line-for-table in))))
+        (let ((time (parse-all-integers (read-line-for-table in)))
+              (distance (parse-all-integers (read-line-for-table in))))
           (if single-race-p
               (cons (first time) (first distance))
               (mapcar #'cons time distance)))))))

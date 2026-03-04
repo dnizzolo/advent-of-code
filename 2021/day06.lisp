@@ -1,13 +1,13 @@
-(defpackage :aoc2021.06
+(defpackage #:aoc2021.06
   (:documentation "Lanternfish.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.06)
+(in-package #:aoc2021.06)
 
 (defun read-lanternfish-initial-population (&optional (rel-path #p"2021/inputs/day06.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code rel-path)))
     (with-open-file (in filename)
-      (parse-integers (read-line in nil)))))
+      (parse-all-integers (read-line in nil)))))
 
 (defun make-fish-counter (fish-list)
   (loop with array = (make-array 9)

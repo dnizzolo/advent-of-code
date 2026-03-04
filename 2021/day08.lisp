@@ -1,9 +1,9 @@
-(defpackage :aoc2021.08
+(defpackage #:aoc2021.08
   (:documentation "Seven Segment Search.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.08)
+(in-package #:aoc2021.08)
 
 (defun read-signal-patterns (&optional (relative-path #p"2021/inputs/day08.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-path)))

@@ -1,8 +1,8 @@
-(defpackage :aoc2023.16
+(defpackage #:aoc2023.16
   (:documentation "The Floor Will Be Lava.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.16)
+(in-package #:aoc2023.16)
 
 (defun read-cavern (&optional (relative-pathname #p"2023/inputs/day16.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

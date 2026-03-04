@@ -1,9 +1,9 @@
-(defpackage :aoc2021.09
+(defpackage #:aoc2021.09
   (:documentation "Smoke Basin.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2021.09)
+(in-package #:aoc2021.09)
 
 (defun read-caves (&optional (rel-path #p"2021/inputs/day09.txt"))
   (let* ((filename (asdf:system-relative-pathname :advent-of-code rel-path))

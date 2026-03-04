@@ -1,12 +1,12 @@
-(defpackage :aoc2024.11
+(defpackage #:aoc2024.11
   (:documentation "Plutonian Pebbles.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.11)
+(in-package #:aoc2024.11)
 
 (defun read-stones (&optional (relative-pathname #p"2024/inputs/day11.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
-    (make-counter (parse-integers (uiop:read-file-line filename)))))
+    (make-counter (parse-all-integers (uiop:read-file-line filename)))))
 
 (defun blink (stones &aux (blinked (make-hash-table)))
   (maphash

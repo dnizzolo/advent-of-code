@@ -1,8 +1,8 @@
-(defpackage :aoc2022.08
+(defpackage #:aoc2022.08
   (:documentation "Treetop Tree House.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.08)
+(in-package #:aoc2022.08)
 
 (defun read-tree-grid (&optional (relative-pathname #p"2022/inputs/day08.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))

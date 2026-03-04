@@ -1,9 +1,9 @@
-(defpackage :aoc2024.08
+(defpackage #:aoc2024.08
   (:documentation "Resonant Collinearity.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.08)
+(in-package #:aoc2024.08)
 
 (defun read-map (&optional (relative-pathname #p"2024/inputs/day08.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

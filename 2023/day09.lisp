@@ -1,15 +1,15 @@
-(defpackage :aoc2023.09
+(defpackage #:aoc2023.09
   (:documentation "Mirage Maintenance.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.09)
+(in-package #:aoc2023.09)
 
 (defun read-report (&optional (relative-pathname #p"2023/inputs/day09.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
       (loop for line = (read-line in nil)
             while line
-            collect (nreverse (parse-integers line))))))
+            collect (nreverse (parse-all-integers line))))))
 
 (defun compute-next-value (history)
   (if (every #'zerop history)

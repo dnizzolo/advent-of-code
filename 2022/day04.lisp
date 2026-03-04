@@ -1,8 +1,8 @@
-(defpackage :aoc2022.04
+(defpackage #:aoc2022.04
   (:documentation "Camp Cleanup.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.04)
+(in-package #:aoc2022.04)
 
 (defun read-cleanup-assignment-pairs (&optional (relative-pathname #p"2022/inputs/day04.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
@@ -12,7 +12,7 @@
             do (dotimes (i (length line))
                  (when (char= (char line i) #\-)
                    (setf (char line i) #\Space)))
-            collect (parse-integers line)))))
+            collect (parse-all-integers line)))))
 
 (defun day04 ()
   (let ((pairs (read-cleanup-assignment-pairs)))

@@ -1,8 +1,8 @@
-(defpackage :aoc2022.05
+(defpackage #:aoc2022.05
   (:documentation "Supply Stacks.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.05)
+(in-package #:aoc2022.05)
 
 (defun read-cargo-stacks-and-moves (&optional (relative-pathname #p"2022/inputs/day05.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))
@@ -19,7 +19,7 @@
                             (setf (gethash j stacks) stack))))
       (maphash (lambda (k v) (setf (gethash k stacks) (nreverse v))) stacks)
       (values stacks (loop for line = (read-line in nil)
-                           while line collect (parse-integers line))))))
+                           while line collect (parse-all-integers line))))))
 
 (defun top-of-cargo-stacks (stacks)
   (loop for i from 1

@@ -1,9 +1,9 @@
-(defpackage :aoc2023.17
+(defpackage #:aoc2023.17
   (:documentation "Clumsy Crucible.")
-  (:local-nicknames (:pq :min-priority-queue))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:pq #:min-priority-queue))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.17)
+(in-package #:aoc2023.17)
 
 (defun read-map (&optional (relative-pathname #p"2023/inputs/day17.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

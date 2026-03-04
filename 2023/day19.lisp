@@ -1,9 +1,9 @@
-(defpackage :aoc2023.19
+(defpackage #:aoc2023.19
   (:documentation "Aplenty.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.19)
+(in-package #:aoc2023.19)
 
 (defun make-machine-part (x m a s)
   (list :x x :m m :a a :s s))
@@ -12,7 +12,7 @@
   (+ (getf part :x) (getf part :m) (getf part :a) (getf part :s)))
 
 (defun read-machine-part (string)
-  (apply #'make-machine-part (parse-integers string)))
+  (apply #'make-machine-part (parse-all-integers string)))
 
 (defstruct (condition-rule (:constructor %make-condition-rule))
   category comparator value result)

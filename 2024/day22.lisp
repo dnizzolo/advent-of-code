@@ -1,9 +1,9 @@
-(defpackage :aoc2024.22
+(defpackage #:aoc2024.22
   (:documentation "Monkey Market.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.22)
+(in-package #:aoc2024.22)
 
 (defun read-initial-numbers (&optional (relative-pathname #p"2024/inputs/day22.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))

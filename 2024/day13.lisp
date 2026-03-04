@@ -1,8 +1,8 @@
-(defpackage :aoc2024.13
+(defpackage #:aoc2024.13
   (:documentation "Claw Contraption.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2024.13)
+(in-package #:aoc2024.13)
 
 (defun read-linear-systems (&optional (relative-pathname #p"2024/inputs/day13.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname))
@@ -13,9 +13,9 @@
               (line-2 (read-line in nil))
               (line-3 (read-line in nil)))
           (unless line-1 (return systems))
-          (push (append (parse-integers line-1)
-                        (parse-integers line-2)
-                        (parse-integers line-3))
+          (push (append (parse-all-integers line-1)
+                        (parse-all-integers line-2)
+                        (parse-all-integers line-3))
                 systems)
           (read-line in nil))))))
 

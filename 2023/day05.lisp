@@ -1,18 +1,18 @@
-(defpackage :aoc2023.05
+(defpackage #:aoc2023.05
   (:documentation "If You Give A Seed A Fertilizer.")
-  (:use :cl :aoc.utils))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2023.05)
+(in-package #:aoc2023.05)
 
 (defun read-almanac (&optional (relative-pathname #p"2023/inputs/day05.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
     (with-open-file (in filename)
-      (loop with seeds = (parse-integers (prog1 (read-line in nil)
-                                           (read-line in nil)))
+      (loop with seeds = (parse-all-integers (prog1 (read-line in nil)
+                                               (read-line in nil)))
             while (listen in)
             collect (loop initially (read-line in nil)
                           for line = (read-line in nil)
-                          while (plusp (length line)) collect (parse-integers line))
+                          while (plusp (length line)) collect (parse-all-integers line))
               into maps
             finally (return (values seeds maps))))))
 

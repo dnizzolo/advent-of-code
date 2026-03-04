@@ -1,9 +1,9 @@
-(defpackage :aoc2022.09
+(defpackage #:aoc2022.09
   (:documentation "Rope Bridge.")
-  (:local-nicknames (:a :alexandria.2))
-  (:use :cl :aoc.utils))
+  (:local-nicknames (#:a #:alexandria.2))
+  (:use #:cl #:aoc.utils))
 
-(in-package :aoc2022.09)
+(in-package #:aoc2022.09)
 
 (defun read-motions (&optional (relative-pathname #p"2022/inputs/day09.txt"))
   (let ((filename (asdf:system-relative-pathname :advent-of-code relative-pathname)))
