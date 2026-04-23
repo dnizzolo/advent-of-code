@@ -18,6 +18,7 @@
    #:all-different-p
    #:all-same-p
    #:parse-all-integers
+   #:transpose
    #:triangular
    #:bit-vector->integer
    #:extended-gcd
@@ -168,6 +169,10 @@ them in a list."
           collect it and do (setf start next-start)
         else
           do (incf start)))
+
+(defun transpose (matrix)
+  "Return the transpose of the list of lists MATRIX."
+  (apply #'mapcar #'list matrix))
 
 (defun triangular (n)
   "Compute the sum of the naturals from 1 to N."
