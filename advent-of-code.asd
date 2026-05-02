@@ -51,7 +51,8 @@
                              (:file "day12")
                              (:file "day13")
                              (:file "day14")
-                             (:file "day15")))
+                             (:file "day15")
+                             (:file "day20")))
                (:module "2023"
                 :components ((:file "day01")
                              (:file "day02")
